@@ -8,8 +8,7 @@ app.get("/extract-t-hash", async (req, res) => {
   try {
     const browser = await chromium.launch({
       headless: true,
-      executablePath:
-        "/opt/render/.cache/ms-playwright/chromium-*/chrome-linux/headless_shell",
+      executablePath: "/usr/bin/google-chrome-stable",
     });
     const page = await browser.newPage();
     await page.goto("https://netfree2.cc/tv/home");
