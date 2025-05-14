@@ -8,7 +8,6 @@ app.get("/extract-t-hash", async (req, res) => {
   let browser;
   try {
     browser = await chromium.launch({
-      executablePath: "/usr/bin/google-chrome-stable",
       headless: true,
       args: [
         "--no-sandbox",
