@@ -6,7 +6,11 @@ const port = process.env.PORT || 3000;
 
 app.get("/extract-t-hash", async (req, res) => {
   try {
-    const browser = await chromium.launch({ headless: true });
+    const browser = await chromium.launch({
+      headless: true,
+      executablePath:
+        "/opt/render/.cache/ms-playwright/chromium-*/chrome-linux/headless_shell",
+    });
     const page = await browser.newPage();
     await page.goto("https://netfree2.cc/tv/home");
 
