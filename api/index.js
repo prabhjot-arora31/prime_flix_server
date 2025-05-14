@@ -11,7 +11,8 @@ app.get("/extract-t-hash", async (req, res) => {
     await page.goto("https://netfree2.cc/tv/home");
 
     const t_hash_t = await page.evaluate(() => {
-      return document.cookie; // Extract the t_hash_t value
+      console.log(document.cookie);
+      return document.cookie; // Extract t_hash_t from cookies
     });
 
     await browser.close();
@@ -23,5 +24,5 @@ app.get("/extract-t-hash", async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Server is listening at http://localhost:${port}`);
+  console.log(`Server is running on http://localhost:${port}`);
 });
