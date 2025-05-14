@@ -1,7 +1,7 @@
 # Use the official Node.js 18 image
 FROM node:18
 
-# Install dependencies to run Chromium
+# Install necessary dependencies for Chromium
 RUN apt-get update && apt-get install -y \
   wget \
   curl \
@@ -20,43 +20,27 @@ RUN apt-get update && apt-get install -y \
   libxss1 \
   fonts-liberation \
   libappindicator3-1 \
-  libatk-bridge2.0-0 \
-  libatk1.0-0 \
-  libnss3 \
-  libxss1 \
   xdg-utils \
   libasound2 \
   lsb-release \
   libdbus-1-3 \
   libxtst6 \
-  libgbm1 \
-  libx11-xcb1 \
-  libxcomposite1 \
-  libxdamage1 \
-  libxrandr2 \
-  libgdk-pixbuf2.0-0 \
-  libnss3 \
-  libgconf-2-4
+  libgconf-2-4 \
+  --no-install-recommends \
+  && rm -rf /var/lib/apt/lists/*
 
-# Install Chromium via a direct download link
-RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
-  apt install -y ./google-chrome-stable_current_amd64.deb && \
-  rm google-chrome-stable_current_amd64.deb
-
-# Install Playwright and other dependencies
-RUN npm install -g playwright
-
-# Set working directory in the container
+# Set working directory
 WORKDIR /app
 
-# Copy all project files into the container
+# Copy project files
 COPY . .
 
-# Install project dependencies
-RUN npm install
+# Install dependencies (project + Playwright)
+RUN npm install \
+  && npx playwright install --with-deps
 
-# Expose necessary port (if required)
+# Expose your app port
 EXPOSE 3000
 
-# Command to run your app (Start server)
+# Start the server
 CMD ["npm", "start"]
