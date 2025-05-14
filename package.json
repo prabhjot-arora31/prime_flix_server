@@ -1,0 +1,17 @@
+{
+  "name": "prime_flix_server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+  "postinstall": "npx playwright install"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "playwright": "^1.52.0",
+    "playwright-core": "^1.52.0"
+  }
+}
